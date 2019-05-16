@@ -7,14 +7,17 @@ describe Tools::ApiHelper do
             result = ah.get_page_data(1)
             expect(result["page"]).to be 1
         end
-
-        it 'Should get SearchQuery entity' do
+        
+        it 'Should parse search results' do 
             q = "query=foo&tags=story"
             ah = Tools::ApiHelper.new(q)
-            result = ah.get_result(1)
 
-            expect(result.is_a? SearchQuery).to be true 
-            expect(result.query_string).to eq "foo"
+            result = ah.get_search_results(1)
+            expect(result.is_a? Hash).to be true 
+            expect(result[:query].is_a? SearchQuery).to be true 
+            expect(result[:results].is_a? Array).to be true 
+            expect(result[:results][0].is_a? SearchResult).to be true 
+            expect(result[:results][0].hn_author).to_not be nil 
         end
     end
 end

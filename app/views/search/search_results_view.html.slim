@@ -1,0 +1,24 @@
+= render 'search_form'
+
+- unless @search_data.nil?
+  = render "pagination_panel"
+  - @search_data[:results].each do |result|
+    .panel.panel-default
+      .panel-heading = result.url
+      .panel-body
+        .row
+          .col-md-3
+            b = "Author"
+          .col-md-3
+            = result.hn_author
+          .col-md-3
+            b = "Creation date"
+          .col-md-3
+            = result.creation_date
+        .row
+          .col-md-3
+            b = "HN tags"
+          .col-md-3
+            - result.hn_tags.split(",").each do |tag|
+              p = tag
+

@@ -1,0 +1,10 @@
+form action="search_results_view" method="get" enctype="multipart/form-data"
+  .row.horizontal-form
+    .col-md-10
+      .form-group
+        = label_tag 'query'
+          | Query
+        = text_field_tag :query, nil, class: 'form-control', value: params[:query]
+    .col-md-2
+      .form-group
+        button.btn.custom-btn.btn-block type="submit" Submit

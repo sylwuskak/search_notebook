@@ -10,6 +10,7 @@ describe SearchResult do
 
         it 'Should create SearchResult with all fields' do
             sn = SearchNotebook.create!(title: "test title")
+            sq = SearchQuery.create!(query_string: "test query")
 
             sr = SearchResult.new(
                 hn_author: "test author",
@@ -17,7 +18,7 @@ describe SearchResult do
                 url: "https://www.wsj.com/articles/maersk-tankers-turns-to-wind-power-to-cut-soaring-fuel-costs-1535641239",
                 creation_date: Date.today,
                 hn_tags: "tag1,tag2,tag3",
-                search_query_id: "some_query",
+                search_query: sq,
                 search_notebook: sn
             )
 

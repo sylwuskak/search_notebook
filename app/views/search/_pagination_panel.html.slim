@@ -1,0 +1,10 @@
+- page = params["page"] || 1
+.row
+  - if page.to_i > 0
+    = link_to params.permit(:query).merge({:page => page.to_i - 1}), :wrap_tag => :li, class: "btn btn-primary"
+      = page.to_i - 1
+  = link_to params.permit(:query).merge({:page => page}), :wrap_tag => :li, class: "btn btn-primary", disabled: true
+    = page
+  = link_to params.permit(:query).merge({:page => page.to_i + 1}), :wrap_tag => :li, class: "btn btn-primary"
+    = page.to_i + 1
+    

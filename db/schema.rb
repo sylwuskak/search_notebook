@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_16_095332) do
+ActiveRecord::Schema.define(version: 2019_05_16_155602) do
 
   create_table "search_notebooks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
@@ -31,11 +31,13 @@ ActiveRecord::Schema.define(version: 2019_05_16_095332) do
     t.string "url", null: false
     t.date "creation_date", null: false
     t.string "hn_tags"
-    t.string "search_query_id", null: false
     t.bigint "search_notebook_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "search_query_id"
     t.index ["search_notebook_id"], name: "index_search_results_on_search_notebook_id"
+    t.index ["search_query_id"], name: "index_search_results_on_search_query_id"
   end
 
+  add_foreign_key "search_results", "search_queries"
 end
