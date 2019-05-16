@@ -1,0 +1,14 @@
+= form_for :search_notebook, url: search_notebooks_path, turboboost: true, method: :post  do |f|
+  .modal.fade#add_notebook tabindex="-1" role="dialog"
+    .modal-dialog role="document"
+      .modal-content
+        .modal-header Add notebook
+        .modal-body
+          .row
+            .col-md-12
+              .form-group
+                = f.label :title, "Title"
+                = f.text_field :title, class: 'form-control'
+        .modal-footer
+          button.btn.custom-btn type="submit" Save
+          button.btn.btn-default data-dismiss="modal" Cancel

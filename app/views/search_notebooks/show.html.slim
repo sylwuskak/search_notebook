@@ -1,0 +1,6 @@
+h3 =@notebook.title
+
+button.btn.btn-xs data-toggle="modal" data-target="#notebook_edit_#{@notebook.id}"
+    span.glyphicon.glyphicon-pencil
+
+= render partial: 'edit_form', locals: {search_notebook: @notebook}

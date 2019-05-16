@@ -1,0 +1,26 @@
+.panel.panel-default
+  .panel-heading 
+    | Search notebooks
+    .btn-group.pull-right
+      button.btn.btn-xs data-toggle="modal" data-target="#add_notebook" type="button"
+        span.glyphicon.glyphicon-plus
+  .panel-body
+    table.table.table-hover
+      thead
+        tr
+          th width="90%" Notebook title
+          th width="10%"
+      tbody 
+      - @search_notebooks.each do |n|
+          tr 
+            td 
+              = link_to n.title, search_notebook_path(n) 
+            td 
+              .btn-group.pull-right
+                button.btn.btn-xs data-toggle="modal" data-target="#notebook_edit_#{n.id}"
+                  span.glyphicon.glyphicon-pencil
+                =link_to search_notebook_path(n), class: 'btn btn-xs', method: :delete, data: {confirm: "Do you really want to delete this notebook?"}
+                  span.glyphicon.glyphicon-remove
+
+= render "add_notebook"
+= render "edit_forms"

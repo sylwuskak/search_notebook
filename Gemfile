@@ -44,6 +44,7 @@ gem 'rspec', '~> 3.0'
 gem 'rspec-rails',      ">= 2.0.0"
 
 gem 'jquery-rails'
+gem 'active_link_to', '~> 1.0.3'
 
 
 group :development, :test do

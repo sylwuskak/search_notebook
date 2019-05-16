@@ -1,0 +1,8 @@
+nav.navbar.navbar-default.navbar-static-top role="navigation" 
+  .container-fluid
+    a.navbar-brand 
+      span.glyphicon.glyphicon-search
+      |  Search Notebook Application
+    .collapse.navbar-collapse
+      ul.nav.navbar-nav
+        li= active_link_to "Notebooks", root_path, active: :exact

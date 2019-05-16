@@ -1,0 +1,14 @@
+= form_for search_notebook, url: search_notebook_path(search_notebook),  turboboost: true, method: :patch  do |f|
+  .modal.fade id="notebook_edit_#{search_notebook.id}" tabindex="-1" role="dialog"
+    .modal-dialog role="document"
+      .modal-content
+        .modal-header Edit notebook
+        .modal-body
+          .row
+            .col-md-12
+              .form-group
+                = f.label :title, "Title"
+                = f.text_field :title, class: 'form-control'
+        .modal-footer
+          button.btn.custom-btn type="submit" Save
+          button.btn.btn-default data-dismiss="modal" Cancel
