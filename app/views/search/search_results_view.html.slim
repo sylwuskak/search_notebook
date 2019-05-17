@@ -3,22 +3,35 @@
 - unless @search_data.nil?
   = render "pagination_panel"
   - @search_data[:results].each do |result|
-    .panel.panel-default
-      .panel-heading = result.url
-      .panel-body
-        .row
-          .col-md-3
-            b = "Author"
-          .col-md-3
-            = result.hn_author
-          .col-md-3
-            b = "Creation date"
-          .col-md-3
-            = result.creation_date
-        .row
-          .col-md-3
-            b = "HN tags"
-          .col-md-3
-            - result.hn_tags.split(",").each do |tag|
-              p = tag
+    = form_for :search_result, url: search_results_path, turboboost: true, method: :post  do |f|
+      .panel.panel-default
+        .panel-heading 
+          = result.url
+          .btn-group.pull-right
+            button.btn.btn-xs.btn-primary type="submit"
+              span.glyphicon.glyphicon-floppy-disk
+              |  Save result
+        .panel-body
+          = hidden_field_tag 'url', result.url
+          = hidden_field_tag 'search_query_id', result.search_query.id
 
+          = hidden_field_tag 'query', params["query"]
+          = hidden_field_tag 'page', params["page"]
+
+          .row
+            .col-md-3
+              .form-group
+                = f.label :hn_author, "Author"
+                = f.text_field :hn_author, class: 'form-control', value: result.hn_author, readonly: true
+            .col-md-3
+              .form-group
+                = f.label :creation_date, "Creation date"
+                = f.text_field :creation_date, class: 'form-control', value: result.creation_date, readonly: true
+            .col-md-3
+              .form-group
+                = f.label :hn_tags, "HN tags"
+                = f.text_field :hn_tags, class: 'form-control', value: result.hn_tags, readonly: true
+            .col-md-3
+              .form-group
+                = f.label :search_notebook_id, "Search notebook"
+                = f.select :search_notebook_id, @search_notebooks.map{|sn| [sn.title, sn.id]}, {}, {class: 'form-control'}

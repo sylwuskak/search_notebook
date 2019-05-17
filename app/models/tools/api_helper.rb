@@ -3,6 +3,13 @@ module Tools
         require 'net/http'
         require 'json'
 
+        def self.get_author_karma_points(author)
+            response = Net::HTTP.get(URI("https://hn.algolia.com/api/v1/users/#{author.to_s}"))
+
+            r = JSON.parse(response)
+            r["karma"]            
+        end
+
         def initialize(query)
             @query = query 
         end

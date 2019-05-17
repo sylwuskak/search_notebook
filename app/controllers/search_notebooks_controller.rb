@@ -32,7 +32,6 @@ class SearchNotebooksController < ApplicationController
     def destroy 
         begin
             SearchNotebook.destroy(params[:id])
-            redirect_to root_path 
         rescue => e 
             flash[:danger] = "Destroying failed: #{e.message}"
         end

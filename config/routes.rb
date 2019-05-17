@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   resources :search_notebooks, only: [:create, :index, :show, :destroy, :update] do 
   end
    
+  resources :search_results, only: [:create, :show, :destroy] do 
+  end
 
 end
