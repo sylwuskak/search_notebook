@@ -23,11 +23,13 @@ class SearchResultsController < ApplicationController
 
     def destroy 
         begin
-            SearchResult.destroy(params[:id])
+            notebook_id = SearchResult.find(params[:id]).search_notebook.id
+            SearchResult.destroy(params[:id])     
         rescue => e 
             flash[:danger] = "Destroying failed: #{e.message}"
         end
-        redirect_to search_results_path 
+
+        redirect_to search_notebook_path(notebook_id)         
     end
 
     private 

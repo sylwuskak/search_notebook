@@ -6,7 +6,7 @@ class SearchNotebooksController < ApplicationController
     end
 
     def show
-
+        @results = @notebook.search_results
     end
 
     def create

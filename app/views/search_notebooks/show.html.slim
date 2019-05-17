@@ -3,4 +3,28 @@ h3 =@notebook.title
 button.btn.btn-xs data-toggle="modal" data-target="#notebook_edit_#{@notebook.id}"
     span.glyphicon.glyphicon-pencil
 
+table.table.table-hover
+  thead
+    tr
+      th width="25%" Author 
+      th width="25%" URL
+      th width="20%" Creation Date
+      th width="25%" HN tags
+      th width="5%"
+  tbody
+    - @results.each do |r|
+      tr
+        td = r.hn_author
+        td = link_to r.url, search_result_path(r)
+        td = r.creation_date
+        td = r.hn_tags.gsub(',', ', ')
+        td 
+          .btn-group.pull-right
+            =link_to search_result_path(r), class: 'btn btn-xs', method: :delete, data: {confirm: "Do you really want to delete this result?"}
+              span.glyphicon.glyphicon-remove
+
+
+
 = render partial: 'edit_form', locals: {search_notebook: @notebook}
+
+

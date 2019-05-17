@@ -1,0 +1,34 @@
+h3 Search result
+.panel.panel-default
+  .panel-heading = @result.url
+  .panel-body
+    .row
+      .col-md-3
+        b = "Author"
+      .col-md-3
+        = @result.hn_author
+      .col-md-3
+        b = "Creation date"
+      .col-md-3
+        = @result.creation_date
+    .row
+      .col-md-3
+        b = "HN tags"
+      .col-md-3
+        - @result.hn_tags.split(",").each do |tag|
+          p = tag
+      .col-md-3
+        b = "Notebook"
+      .col-md-3
+        = link_to @result.search_notebook.title, search_notebook_path(@result.search_notebook)
+
+h4 Search query
+- query = @result.search_query
+.panel.panel-default
+  .panel-heading = query.query_string
+  .panel-body
+    .row
+      .col-md-6
+        b = "Number of hits"
+      .col-md-6
+        = query.number_of_hits
