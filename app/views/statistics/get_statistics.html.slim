@@ -1,0 +1,13 @@
+table.table.table-hover
+  thead
+    tr
+      th width="33%" Search query 
+      th width="33%" Average of total search results for the last day
+      th width="33%" Average of total search results for the last week
+  tbody
+    - @statistics.each do |s|
+      tr
+        td = s[:query_string]
+        td = s[:average_day]
+        td = s[:average_week]
+        
