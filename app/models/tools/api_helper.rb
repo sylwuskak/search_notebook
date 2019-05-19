@@ -7,7 +7,34 @@ module Tools
             response = Net::HTTP.get(URI("https://hn.algolia.com/api/v1/users/#{author.to_s}"))
 
             r = JSON.parse(response)
-            r["karma"]            
+            r["karma"]
+        end
+
+        def self.check_data_correction(result)
+            karma = Tools::ApiHelper.get_author_karma_points(result.hn_author)
+
+            response = Net::HTTP.get(URI("https://hn.algolia.com/api/v1/search?tags=author_#{result.hn_author.to_s}&numericFilters=created_at_i=#{result.creation_date.to_i}"))
+
+            r = JSON.parse(response)
+            result_data = r["hits"].first
+            if result_data.nil?
+                return nil;
+            end
+
+            new_result = SearchResult.new(
+                hn_author: result_data["author"],
+                url: result_data["url"],
+                creation_date: DateTime.parse(result_data["created_at"]),
+                hn_tags: result_data["_tags"].join(','),
+                search_query: query, 
+                author_karma_points: karma
+            )
+
+            if new_result.attributes.except('id', 'created_at', 'updated_at') != result.attributes.except('id', 'created_at', 'updated_at')
+                return new_result
+            end
+
+            nil
         end
 
         def initialize(query)
@@ -32,7 +59,7 @@ module Tools
             SearchResult.new(
                 hn_author: result_data["author"],
                 url: result_data["url"],
-                creation_date: Date.parse(result_data["created_at"]),
+                creation_date: DateTime.parse(result_data["created_at"]),
                 hn_tags: result_data["_tags"].join(','),
                 search_query: query
             )

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_16_155602) do
+ActiveRecord::Schema.define(version: 2019_05_19_170627) do
 
   create_table "search_notebooks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2019_05_16_155602) do
     t.string "hn_author", null: false
     t.integer "author_karma_points", null: false
     t.string "url", null: false
-    t.date "creation_date", null: false
+    t.datetime "creation_date", null: false
     t.string "hn_tags"
     t.bigint "search_notebook_id", null: false
     t.datetime "created_at", null: false
